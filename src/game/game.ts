@@ -1,5 +1,5 @@
-import { createTextSpan } from 'typescript'
-import { Entity } from '../utils/ecs/entity'
+import { Settings } from '@/settings'
+import { Entity } from '@/utils'
 
 export class Game extends Entity {
 
@@ -22,7 +22,7 @@ export class Game extends Entity {
             // start game loop.
             this.Update()
         })
-        
+
         this.DirtyDraw()
     }
 
@@ -42,15 +42,22 @@ export class Game extends Entity {
 
     private DirtyDraw(): void {
         const canvas = document.createElement('canvas')
-        canvas.setAttribute('width', '500px')
-        canvas.setAttribute('height', '500px')
+        const canvasSize = (Settings.grid.nodeSize + Settings.grid.nodeOffset) * Settings.grid.dimension + Settings.grid.nodeOffset
+        canvas.setAttribute('width', canvasSize.toString())
+        canvas.setAttribute('height', canvasSize.toString())
         document.body.appendChild(canvas)
 
-        const ctx = canvas.getContext('2d')!
-        ctx.beginPath()
-        ctx.fillStyle = 'rgba(255, 0, 0, 1)'
-        ctx.rect(10, 10, 50, 50)
-        ctx.fill()
+        const size = Settings.grid.nodeSize
+        const offset = Settings.grid.nodeOffset
+        for (let y = 0; y < Settings.grid.dimension; y++) {
+            for (let x = 0; x < Settings.grid.dimension; x++) {
+                const ctx = canvas.getContext('2d')!
+                ctx.beginPath()
+                ctx.fillStyle = Settings.grid.color
+                ctx.rect((size + offset) * x, (size + offset) * y, size, size)
+                ctx.fill()
+            }
+        }
     }
 
 }
