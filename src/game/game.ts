@@ -1,3 +1,4 @@
+import { createTextSpan } from 'typescript'
 import { Entity } from '../utils/ecs/entity'
 
 export class Game extends Entity {
@@ -21,6 +22,8 @@ export class Game extends Entity {
             // start game loop.
             this.Update()
         })
+        
+        this.DirtyDraw()
     }
 
 
@@ -36,4 +39,18 @@ export class Game extends Entity {
         this._lastTimestamp = Date.now()
         window.requestAnimationFrame(() => this.Update())
     }
+
+    private DirtyDraw(): void {
+        const canvas = document.createElement('canvas')
+        canvas.setAttribute('width', '500px')
+        canvas.setAttribute('height', '500px')
+        document.body.appendChild(canvas)
+
+        const ctx = canvas.getContext('2d')!
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(255, 0, 0, 1)'
+        ctx.rect(10, 10, 50, 50)
+        ctx.fill()
+    }
+
 }
