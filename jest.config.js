@@ -6,7 +6,7 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest'
   },
-  setupFiles: [],
+  setupFiles: ["jest-canvas-mock"],
   transformIgnorePatterns: [
     '/node_modules/'
   ],
