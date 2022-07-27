@@ -1,10 +1,10 @@
 import { IComponent } from './component.h'
-import { IUpdate } from '../update.h';
+import { IAwake, IUpdate } from '../lifecycle'
 
 
-type constr<T> = {new(...args: unknown[]): T}
+type constr<T> = { new(...args: unknown[]): T }
 
-export abstract class Entity implements IUpdate{
+export abstract class Entity implements IAwake, IUpdate {
     protected _components: IComponent[] = []
 
     public get Components(): IComponent[] {
@@ -39,7 +39,7 @@ export abstract class Entity implements IUpdate{
             }
         }
 
-        if (toRemove && index){
+        if (toRemove && index) {
             toRemove.Entity = null
             this._components.splice(index, 1)
         }
@@ -47,13 +47,19 @@ export abstract class Entity implements IUpdate{
     }
 
     public HasComponent<C extends IComponent>(constr: constr<C>): boolean {
-        for (const component of this._components){
-            if (component instanceof constr){
+        for (const component of this._components) {
+            if (component instanceof constr) {
                 return true
             }
         }
 
         return false
+    }
+
+    public Awake(): void {
+        for (const component of this._components) {
+            component.Awake()
+        }
     }
 
     public Update(deltaTime: number): void {
