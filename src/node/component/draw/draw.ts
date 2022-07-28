@@ -1,7 +1,7 @@
 import { IComponent } from '@/utils'
 import { Node } from '@/node/node'
 import { Settings } from '@/settings'
-import { CanvasLayer } from '../../../utils/canvas-layer/canvas-layer'
+import { CanvasLayer } from '@/canvas-layer'
 
 export class NodeDrawComponent implements IComponent {
     public Entity: Node

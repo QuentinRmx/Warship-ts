@@ -1,4 +1,3 @@
-import { Settings } from '@/settings'
 import { Entity } from '@/utils'
 import { Grid } from '../grid/grid'
 
