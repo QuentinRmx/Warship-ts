@@ -1,5 +1,5 @@
 import { Game } from '@/game'
-import { Entity, IComponent } from '@/utils'
+import { IComponent } from '@/utils'
 import { Grid } from '@/grid'
 
 class C1 implements IComponent {

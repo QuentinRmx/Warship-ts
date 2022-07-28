@@ -1,8 +1,6 @@
 import { NodeDrawComponent } from "./draw"
-import { CanvasLayer } from "@/utils"
+import { CanvasLayer } from "@/canvas-layer"
 import { mockNodeFactory } from "@/node"
-import { Node } from "@/node"
-import { Vector2D } from "@/utils"
 
 describe('>>> Node Draw Component', () => {
     let comp: NodeDrawComponent
