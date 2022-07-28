@@ -1,5 +1,7 @@
 import { Entity } from '@/utils'
 import { Grid } from '../grid/grid'
+import { Fleet } from '@/fleet'
+import { Team } from '@/team'
 
 
 export class Game extends Entity {
@@ -14,8 +16,10 @@ export class Game extends Entity {
 
     public Awake(): void {
         super.Awake()
-
-        this._entities.push(new Grid())
+        const grid = new Grid()
+        this._entities.push(grid,
+            new Fleet(Team.A, grid),
+            new Fleet(Team.B, grid))
 
         for (const entity of this._entities) {
             entity.Awake()

@@ -1,5 +1,5 @@
 import { Entity } from "@/utils"
-import { NodeDrawComponent } from './component/draw/draw'
+import { NodeDrawComponent } from './components/draw/draw'
 import { Vector2D } from '../utils/vector2d/vector2d'
 
 export class Node extends Entity {
@@ -21,5 +21,12 @@ export class Node extends Entity {
 
     public get Size(): Vector2D {
         return new Vector2D(this.End.x - this.Start.x, this.End.y - this.Start.y)
+    }
+
+    public get Center(): Vector2D {
+        return new Vector2D(
+            this.Start.x + this.Size.x / 2,
+            this.Start.y + this.Size.y / 2
+        )
     }
 }
